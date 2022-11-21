@@ -14,7 +14,7 @@
 	<div class="container">
 		<%if(id != null){ %>
 			<p>
-				<strong><%=id %></strong>님은 로그인중...
+				<strong><%=id %></strong>님 로그인중...
 				<a href="${pageContext.request.contextPath }/users/logout.jsp">로그아웃</a>
 			</p>
 		<%}else{ %>
@@ -22,7 +22,9 @@
 		<%} %>
 		<h1>인덱스 페이지 입니다.</h1>
 		<ul>
-			<li><a href="${pageContext.request.contextPath }/users/signup_form.jsp" >회원 가입</a></li>
+			<li><a href="${pageContext.request.contextPath }/users/signup_form.jsp" >회원가입</a></li>
+			<li><a href="${pageContext.request.contextPath }/private/study.jsp">회원전용공간(공부)</a></li>
+			<li><a href="${pageContext.request.contextPath }/private/game.jsp">회원전용공간(게임)</a></li>			
 		</ul>
 	</div>
 </body>
