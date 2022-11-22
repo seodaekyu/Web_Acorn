@@ -102,7 +102,7 @@ public class UsersDao {
       }
    }
    
-   // 인자로 전다로디는 dto에 있는 아이디와 비밀번호를 이용해서 해당 정보가 유효한 정보인지 여부를 리턴하는 메소드
+   // 인자로 전달되는 dto에 있는 아이디와 비밀번호를 이용해서 해당 정보가 유효한 정보인지 여부를 리턴하는 메소드
    public boolean isValid(UsersDto dto) {
 	      // 필요한 객체를 담을 지역변수를 미리 만들어 둔다
 	   	  Connection conn = null;
@@ -147,7 +147,40 @@ public class UsersDao {
 	      return isValid;
 	   }
    
-
+   // 비밀번호 수정
+   public boolean updatePwd(UsersDto dto) { 
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      int rowCount = 0;
+	      try {
+	         conn = new DbcpBean().getConn();
+	         String sql = "UPDATE users"
+	         		+ " SET pwd = ?"
+	         		+ " WHERE id = ? AND pwd = ?";
+	         pstmt = conn.prepareStatement(sql);
+	         // ? 에 바인딩할게 있으면 해주고
+	         pstmt.setString(1, dto.getNewPwd());
+	         pstmt.setString(2, dto.getId());
+	         pstmt.setString(3, dto.getPwd());
+	         // INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW 의 갯수 리턴 받기
+	         rowCount = pstmt.executeUpdate();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (pstmt != null)
+	               pstmt.close();
+	            if (conn != null)
+	               conn.close();
+	         } catch (Exception e) {
+	         }
+	      }
+	      if (rowCount > 0) {
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
 }
 
 

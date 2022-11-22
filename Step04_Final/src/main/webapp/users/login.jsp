@@ -4,14 +4,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
 	// 로그인 후 가야할 목적지 정보
 	String url = request.getParameter("url");
 	// 로그인 실패를 대비해서 목적지 정보를 인코딩한 결과도 준비한다.
 	String encodeUrl = URLEncoder.encode(url);
 
 	// 1. 폼 전송되는 아이디, 비밀번호 읽어오기
-	request.setCharacterEncoding("utf-8");
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 
@@ -45,6 +43,14 @@
 		<%}else{ %>
 			<p class="alert alert-danger">
 				아이디 혹은 비밀번호가 틀려요
+				<!-- 
+					get방식 파라미터를 전달할 때 반드시! 인코딩을 해야함.
+					/users/loginform.jsp?url=/Step04/aaa/bbb.jsp?num=2&code=a666 전체를 읽어내야하는데 
+					/Step04/aaa/bbb.jsp?num=2밖에 안읽어짐. 뒤에 &은 또다른 파라미터로 인식됨.
+					loginform.jsp 페이지에서 request.getParameter("url") => "/Step04/aaa/bbb.jsp?num=2"
+					따라서 /users/loginform.jsp?url=%xStep04%xaaa%xbbb.jsp%xnum%x2%xcode%xa666처럼 인코딩을 시켜줘야함.
+					인코딩을 하면 알아서 바꿔주고 request.getParameter("")를 하면 알아서 디코딩해줌.					
+				 --> 
 				<a href="${pageContext.request.contextPath }/users/loginform.jsp?url=<%=encodeUrl%>">다시시도</a>				
 			</p>
 		<%} %>
