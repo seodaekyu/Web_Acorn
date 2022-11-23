@@ -161,7 +161,7 @@ public class FileDao {
 		return list;
 	}
 	
-	// 파일 삭제
+	// 파일 하나의 정보를 삭제하는 메소드
 	public boolean delete(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
