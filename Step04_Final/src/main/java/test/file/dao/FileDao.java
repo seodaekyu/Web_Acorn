@@ -23,6 +23,45 @@ public class FileDao {
 		}
 		return dao;
 	}
+	// 전체 글의 갯수를 리턴하는 메소드
+	public int getCount() {
+		// 글의 갯수를 담을 지역변수
+		int count = 0;
+		
+		// 필요한 객체를 담을 지역변수를 미리 만들어 둔다.
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// Connection Pool에서 Connection 객체를 하나 얻어온다.
+			conn = new DbcpBean().getConn();
+			// 실행할 sql 문의 뼈대 구성하기
+			String sql = "SELECT MAX(ROWNUM) AS num"
+					+ " FROM board_file";
+			// sql 문의 ?에 바인딩 할 게 있으면 한다.
+
+			pstmt = conn.prepareStatement(sql);
+			// SELECT문을 수행하고 결과값을 받아온다.
+			rs = pstmt.executeQuery();
+			// 반복문 돌면서 ResultSet에서 필요한 값을 얻어낸다.
+			if (rs.next()) {
+				count = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return count;
+	}
 	
 	 //파일 하나의 정보를 리턴하는 메소드
 	   public FileDto getData(int num) {
@@ -112,8 +151,8 @@ public class FileDao {
 		}
 	}
 	
-	// 파일 목록을 리턴하는 메소드
-	public List<FileDto> getList(){
+	// 특정 페이지에 해당하는 파일 목록을 리턴하는 메소드
+	public List<FileDto> getList(FileDto dto){
 		// 파일 목록을 담을 ArrayList 객체를 생성
 		List<FileDto> list = new ArrayList<>();
 		
@@ -125,25 +164,33 @@ public class FileDao {
 			// Connection Pool에서 Connection 객체를 하나 얻어온다.
 			conn = new DbcpBean().getConn();
 			// 실행할 sql 문의 뼈대 구성하기
-			String sql = "SELECT num, writer, title, orgFileName, fileSize, TO_CHAR(regdate, 'YYYY.MM.DD HH24:MI') regdate"
-					+ " FROM board_file"
-					+ " ORDER BY num DESC";
+			String sql = "SELECT *"
+					+ " FROM"
+					+ "	(SELECT result1.*, ROWNUM AS rnum"
+					+ "	FROM"
+					+ "		(SELECT num, writer, title, orgFileName, fileSize, regdate"
+					+ "		FROM board_file"
+					+ "		ORDER BY num DESC) result1)"
+					+ " WHERE rnum BETWEEN ? AND ?";
 			// sql 문의 ?에 바인딩 할 게 있으면 한다.
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getStartRowNum());
+			pstmt.setInt(2, dto.getEndRowNum());
+			
 			// SELECT문을 수행하고 결과값을 받아온다.
 			rs = pstmt.executeQuery();
 			// 반복문 돌면서 ResultSet에서 필요한 값을 얻어낸다.
 			while (rs.next()) {
 				// FileDto 객체에 select 된 row 하나의 정보를 담고
-				FileDto dto = new FileDto();
-				dto.setNum(rs.getInt("num"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setTitle(rs.getString("title"));
-				dto.setOrgFileName(rs.getString("orgFileName"));
-				dto.setFileSize(rs.getLong("fileSize"));
-				dto.setRegdate(rs.getString("regdate"));
+				FileDto tmp = new FileDto();
+				tmp.setNum(rs.getInt("num"));
+				tmp.setWriter(rs.getString("writer"));
+				tmp.setTitle(rs.getString("title"));
+				tmp.setOrgFileName(rs.getString("orgFileName"));
+				tmp.setFileSize(rs.getLong("fileSize"));
+				tmp.setRegdate(rs.getString("regdate"));
 				// ArrayList 객체에 누적 시킨다.
-				list.add(dto);
+				list.add(tmp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
