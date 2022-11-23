@@ -16,11 +16,12 @@
            파일의 사이는 어떻게 되는지 => fileSize
       - 다운로드 시켜주기 위해서는 위의 3가지 정보가 필요하다.
    */
-   FileDto dto=FileDao.getInstance().getData(num);
+   	FileDto dto=FileDao.getInstance().getData(num);
     //3. 서버의 파일시스템(upload) 에 저장된 파일에서 바이트 알갱이를 읽어서 출력한다(다운로드)
     String orgFileName=dto.getOrgFileName();
     String saveFileName=dto.getSaveFileName();
     //다운로드 시켜줄 파일의 실제 경로 구성하기 
+    // window : \, linux : /이기 때문에 시스템에 따라 구분자가 달라짐
     String path=application.getRealPath("/upload") + File.separator+saveFileName;
     //다운로드할 파일에서 읽어들일 스트림 객체 생성하기
     FileInputStream fis=new FileInputStream(path);
@@ -45,7 +46,11 @@
     //다운로드할 파일의 크기 읽어와서 다운로드할 파일의 크기 설정
     response.setContentLengthLong(dto.getFileSize());
     
-    //클라이언트에게 출력할수 있는 스트림 객체 얻어오기
+    //Exception 발생하지 않도록 (response.getOutputStream() 호출 전에 해야한다.)
+    out.clear();
+    out = pageContext.pushBody();
+    
+    //클라이언트에게 출력할 수 있는 스트림 객체 얻어오기
     BufferedOutputStream bos=
        new BufferedOutputStream(response.getOutputStream());
     //한번에 최대 1M byte 씩 읽어올수 있는 버퍼
