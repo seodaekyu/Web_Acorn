@@ -201,7 +201,6 @@ public class UsersDao {
 			pstmt.setString(1, dto.getEmail());
 			pstmt.setString(2, dto.getProfile());
 			pstmt.setString(3, dto.getId());
-	
 			// INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW의 갯수 리턴 받기
 			rowCount = pstmt.executeUpdate();
 	
