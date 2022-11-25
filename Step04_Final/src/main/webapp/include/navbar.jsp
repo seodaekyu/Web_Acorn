@@ -31,7 +31,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="collapse navbar-collapse" id="navbarNav2">
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav2">
 			<ul class="navbar-nav">
 				<%if(id == null){ %>
 	               <li class="nav-item">
