@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	
 
 	// 한 페이지에 몇 개씩 표시할 것인지
 	final int PAGE_ROW_COUNT = 5;
@@ -58,6 +57,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
+	<%-- navbar 포함 --%>
+	<jsp:include page="/include/navbar.jsp">
+		<jsp:param value="cafeList" name="thisPage"/>
+	</jsp:include>
+	
 	<div class="container">
 		<a href="${pageContext.request.contextPath }/cafe/private/insertform.jsp">새글 작성</a>
 		<h3>카페 글 목록 입니다.</h3>
