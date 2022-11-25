@@ -34,6 +34,46 @@ public class CafeDao {
 		return dao;
 	}
 	
+	// 글 하나의 정보를 수정하는 메소드
+	public boolean update(CafeDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		int rowCount = 0;
+
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "UPDATE board_cafe"
+					+ " SET title=?, content=?"
+					+ " WHERE num=?";
+
+			pstmt = conn.prepareStatement(sql);
+			// ?에 바인딩할게 있으면 해주고
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getNum());
+
+			// INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW의 갯수 리턴 받기
+			rowCount = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		if (rowCount > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
    //글 하나의 정보를 리턴해주는 메소드
    public CafeDto getData(int num) {
       CafeDto dto=null;
