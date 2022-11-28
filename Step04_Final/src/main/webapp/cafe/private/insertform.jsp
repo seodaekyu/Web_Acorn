@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="container">
-		<h3 class="mt-3">새글 작성 폼입니다.</h3>
+		<h3 class="mt-3"><strong>새글 작성 폼입니다.</strong></h3>
 		<form action="insert.jsp" method="post">
 			<div class="mb-3 col-6">
 				<label class="form-label mt-3" for="title">제목</label>
