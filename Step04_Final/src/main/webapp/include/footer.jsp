@@ -16,16 +16,17 @@
   </symbol>
 </svg>
 
-<footer class="page-footer font-small bg-dark pt-5 text-center">
+<footer class="page-footer font-small bg-dark pt-4 text-center">
 	<div class="container">
 		<div class="row">
 			<div class="col text-center">
-				<div class="pb-3">
+				<span class="text-muted">Acorn Academy</span>
+				<div class="pb-3 mt-3">
 					<a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a>
 					<a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a>
 					<a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a>		
 				</div>
-				<span class="text-muted">&copy; 2021 Company, Inc</span>
+				<span class="text-muted">&copy; 2022 Company, Inc</span>
 			</div>
 		</div>
 	</div>

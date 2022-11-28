@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/private/insertform.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <style>
 	textarea{
 		width: 768px;
@@ -14,19 +16,19 @@
 </head>
 <body>
 	<div class="container">
-		<h3>새글 작성 폼입니다.</h3>
+		<h3 class="mt-3">새글 작성 폼입니다.</h3>
 		<form action="insert.jsp" method="post">
-			<div>
-				<label for="title">제목</label>
-				<input type="text" name="title" id="title" />
+			<div class="mb-3 col-6">
+				<label class="form-label mt-3" for="title">제목</label>
+				<input class="form-control" type="text" name="title" id="title" />
 			</div>
-			<div>
-				<label for="content">내용</label>
+			<div class="mb-3">
+				<label class="form-label mt-3" for="content">내용</label>
 				<!-- 여기서 부여한  id와 밑의 script와 일치해야함. -->
 				<textarea name="content" id="content" rows="10"></textarea>
 			</div>
 			<!-- 폼제출을 자바스크립트를 실행해서 폼을 제출해야함. -->
-			<button type="submit" onclick="submitContents(this)">저장</button>
+			<button class="btn btn-dark" type="submit" onclick="submitContents(this)">저장</button>
 		</form>
 	</div>
 	   <%--
