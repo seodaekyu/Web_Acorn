@@ -35,7 +35,7 @@
 	</jsp:include>
 	
 	<div class="container">
-		<h1 class="mt-3">게임 페이지입니다.</h1>
+		<h3 class="mt-3"><strong>게임 페이지입니다.</strong></h3>
 		<p class="mt-3"><%=id %>님 열심히 게임해요!</p>
 	</div>
 	<jsp:include page="/include/footer.jsp"></jsp:include>

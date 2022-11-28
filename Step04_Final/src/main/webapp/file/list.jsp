@@ -85,7 +85,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h3 class="mt-3">자료실 목록 보기</h3>
+				<h3 class="mt-3"><strong>자료실 목록 보기</strong></h3>
 			</div>
 			<div class="col text-end">
 				<a href="${pageContext.request.contextPath }/file/private/upload_form.jsp">

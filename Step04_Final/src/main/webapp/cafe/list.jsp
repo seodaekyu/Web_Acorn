@@ -81,7 +81,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h3 class="mt-3">카페 글 목록 입니다.</h3>
+				<h3 class="mt-3"><strong>카페 글 목록 입니다.</strong></h3>
 			</div>
 			<div class="col text-end">
 				<a href="${pageContext.request.contextPath }/cafe/private/insertform.jsp">

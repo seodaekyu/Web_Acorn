@@ -30,7 +30,7 @@
 		<jsp:param value="" name="thisPage"/>
 	</jsp:include>
 	<div class="container">
-		<h3 class="mt-3">파일 업로드 폼입니다.</h3>
+		<h3 class="mt-3"><strong>파일 업로드 폼입니다.</strong></h3>
 		<!-- 
 			파일 업로드 폼 작성법
 			1. method="post"

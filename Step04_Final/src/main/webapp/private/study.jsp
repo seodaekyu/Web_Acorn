@@ -35,7 +35,7 @@
 	</jsp:include>
 	
 	<div class="container">
-		<h1 class="mt-3">공부페이지 입니다.</h1>
+		<h3 class="mt-3"><strong>공부페이지 입니다.</strong></h3>
 		<p class="mt-3"><%=id %>님 열심히 공부해요!</p>
 	</div>
 	
