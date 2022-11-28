@@ -23,8 +23,8 @@
 	<jsp:include page="/include/navbar.jsp">
 		<jsp:param value="loginForm" name="thisPage"/>
 	</jsp:include>
-	<div class="container">
-		<h1>로그인 폼</h1>
+	<div class="container mt-3">
+		<h3>로그인 폼</h3>
 		<form action="login.jsp" method = "post">
 			<!-- 로그인 성공 후 어디로 갈 지에 대한 정보를 url 이라는 파라미터 명으로 같이 전송되도록 한다. -->
 			<input type="hidden" name = "url" value="<%=url %>" />
@@ -36,7 +36,7 @@
 				<label class="form-label" for="pwd">비밀번호</label>
 				<input class="form-control" type="password" name="pwd" id="pwd"/>
 			</div>
-			<button class="btn btn-primary" type="submit">로그인</button>
+			<button class="btn btn-dark mt-3" type="submit">로그인</button>
 		</form>
 	</div>
 </body>
