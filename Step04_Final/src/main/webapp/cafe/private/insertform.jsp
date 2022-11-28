@@ -12,9 +12,27 @@
 		width: 768px;
 		height: 300px;
 	}
+	html {
+	  position: relative;
+	  min-height: 100%;
+	  padding-bottom:160px;
+	}
+	body {
+	  margin-bottom: 160px;
+	}
+	footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 160px;
+	}
 </style>
 </head>
 <body>
+	<%-- navbar 포함 --%>
+	<jsp:include page="/include/navbar.jsp">
+		<jsp:param value="" name="thisPage"/>
+	</jsp:include>
 	<div class="container">
 		<h3 class="mt-3"><strong>새글 작성 폼입니다.</strong></h3>
 		<form action="insert.jsp" method="post">
@@ -31,6 +49,7 @@
 			<button class="btn btn-dark" type="submit" onclick="submitContents(this)">저장</button>
 		</form>
 	</div>
+	<jsp:include page="/include/footer.jsp"></jsp:include>
 	   <%--
       [ SmartEditor 를 사용하기 위한 설정 ]
       

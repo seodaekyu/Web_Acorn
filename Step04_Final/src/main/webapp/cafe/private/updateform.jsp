@@ -21,9 +21,27 @@
 		width: 768px;
 		height: 300px;
 	}
+	html {
+	  position: relative;
+	  min-height: 100%;
+	  padding-bottom:160px;
+	}
+	body {
+	  margin-bottom: 160px;
+	}
+	footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 160px;
+	}
 </style>
 </head>
 <body>
+	<%-- navbar 포함 --%>
+	<jsp:include page="/include/navbar.jsp">
+		<jsp:param value="" name="thisPage"/>
+	</jsp:include>
 	<div class="container">
 		<h3 class="mt-3"><strong>글 수정 폼입니다.</strong></h3>
 		<form action="update.jsp" method="post">
@@ -41,6 +59,7 @@
 			<button class="btn btn-danger" type="reset">취소</button>
 		</form>
 	</div>
+	<jsp:include page="/include/footer.jsp"></jsp:include>
 	<!-- SmartEditor 에서 필요한 javascript 로딩  -->
    <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
    <script>
