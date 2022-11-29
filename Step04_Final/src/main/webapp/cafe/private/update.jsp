@@ -24,17 +24,19 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/private/update.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container">
 		<%if(isSuccess){ %>
-			<p>
-			 	수정 했습니다.
+			<p class="alert alert-success">
+			 	수정했습니다.
 				<a href="${pageContext.request.contextPath }/cafe/detail.jsp?num=<%=num%>">확인</a>
 			</p>
 		<%}else{ %>
-			<p>
-				수정 실패했습니다.
+			<p class="alert alert-danger">
+				수정을 실패했습니다.
 				<a href="updateform.jsp?num=<%=dto.getNum()%>">다시 수정하러 가기</a>
 			</p>
 		<%} %>

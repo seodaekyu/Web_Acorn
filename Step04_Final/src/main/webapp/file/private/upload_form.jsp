@@ -5,10 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>/file/private/upload_form.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<style>
+	html {
+	  position: relative;
+	  min-height: 100%;
+	  padding-bottom:160px;
+	}
+	body {
+	  margin-bottom: 160px;
+	}
+	footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 160px;
+	}
+</style>
 </head>
 <body>
+	<%-- navbar 포함 --%>
+	<jsp:include page="/include/navbar.jsp">
+		<jsp:param value="" name="thisPage"/>
+	</jsp:include>
 	<div class="container">
-		<h3>파일 업로드 폼입니다.</h3>
+		<h3 class="mt-3"><strong>파일 업로드 폼입니다.</strong></h3>
 		<!-- 
 			파일 업로드 폼 작성법
 			1. method="post"
@@ -19,16 +41,17 @@
 			  MultipartRequest 객체를 이용해서 추출해야 한다.
 		 -->
 		 <form action="upload.jsp" method="post" enctype="multipart/form-data">
-		 	<div>
-		 		<label for="title">제목</label>
-		 		<input type="text" name="title" id="title" />
+		 	<div class="mb-3 col-6">
+		 		<label class="form-label mt-3" for="title">제목</label>
+		 		<input class="form-control" type="text" name="title" id="title" />
 		 	</div>
-		 	<div>
-		 		<label for="myFile">첨부파일</label>
-		 		<input type="file" name="myFile" id="myFile" />
+		 	<div div class="mb-3 col-6">
+		 		<label class="form-label" for="myFile">첨부파일</label>
+		 		<input class="form-control" id="formFile" type="file" name="myFile" id="myFile" />
 		 	</div>
-		 	<button type="submit">업로드</button>
+		 	<button class="btn btn-dark mt-3" type="submit">업로드</button>
 		 </form>
 	</div>
+	<jsp:include page="/include/footer.jsp"></jsp:include>
 </body>
 </html>
