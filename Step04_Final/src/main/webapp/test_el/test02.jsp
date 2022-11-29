@@ -25,7 +25,7 @@
 		(웹브라우저를 닫거나 세션을 초기화 하기 전까지 사용할수 있다)
 	*/
 	session.setAttribute("ourName", ourName);
-	
+
 	String companyName="에이콘";
 	/*
 		application scope 에 "companyName" 이라는 키값으로 companyName 담기
@@ -60,7 +60,7 @@
 	<p>우리 이름은 <strong>${ourName }</strong></p>
 	<%-- 위의 EL 은 아래의 코드를 대신할수 있다. --%>
 	<%
-		String result2 = (String)session.getAttribute("ourName");
+		String result2 = (String)session.geAttribute("ourName");
 	%>
 	<p>우리 이름은 <strong><%=result2 %></strong></p>
 	
