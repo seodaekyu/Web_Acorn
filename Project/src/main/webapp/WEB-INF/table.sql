@@ -9,3 +9,14 @@ CREATE TABLE book(
 	publicationdate DATE
 );
 
+-- 책 대여 정보를 저장할 테이블
+CREATE SEQUENCE bookrent_seq;
+
+CREATE TABLE rent(
+	rentnum NUMBER PRIMARY KEY,
+	booknum NUMBER,
+	id VARCHAR(50),
+	rentdate DATE,
+	returndate DATE
+);
+

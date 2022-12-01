@@ -3,8 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	// 인코딩
-	request.setCharacterEncoding("utf-8");
 	// 추가할 책 정보 받아오기
 	String name = request.getParameter("name");
 	String publisher = request.getParameter("publisher");
