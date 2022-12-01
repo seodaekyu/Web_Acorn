@@ -6,5 +6,6 @@ CREATE TABLE book(
 	name VARCHAR(100),
 	publisher VARCHAR(50),
 	author VARCHAR(30),
-	publicdate DATE
+	publicationdate DATE
 );
+
