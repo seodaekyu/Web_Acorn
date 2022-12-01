@@ -18,6 +18,7 @@
 		<li><a href="${pageContext.request.contextPath }/users/logout.jsp">로그아웃</a></li>
 		<li><a href="${pageContext.request.contextPath }/users/signup_form.jsp">회원가입</a></li>
 		<li><a href="${pageContext.request.contextPath }/books/list.jsp">도서목록</a></li>
+		<li><a href="${pageContext.request.contextPath }/books/insertform.jsp">도서추가</a></li>
 	</ul>	
 </body>
 </html>

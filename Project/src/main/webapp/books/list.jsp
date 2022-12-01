@@ -13,27 +13,29 @@
 <title>/books/list.jsp</title>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>도서번호</th>
-				<th>도서이름</th>
-				<th>출판사</th>
-				<th>저자</th>
-				<th>출판일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%for(BookDto tmp:list){ %>
+	<div class="container">
+		<table>
+			<thead>
 				<tr>
-					<td><%=tmp.getNum() %></td>
-					<td><%=tmp.getName() %></td>
-					<td><%=tmp.getPublisher() %></td>
-					<td><%=tmp.getAuthor() %></td>
-					<td><%=tmp.getPublicationDate() %></td>
+					<th>도서번호</th>
+					<th>도서이름</th>
+					<th>출판사</th>
+					<th>저자</th>
+					<th>출판일</th>
 				</tr>
-			<%} %>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<%for(BookDto tmp:list){ %>
+					<tr>
+						<td><%=tmp.getNum() %></td>
+						<td><%=tmp.getName() %></td>
+						<td><%=tmp.getPublisher() %></td>
+						<td><%=tmp.getAuthor() %></td>
+						<td><%=tmp.getPublicationDate() %></td>
+					</tr>
+				<%} %>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

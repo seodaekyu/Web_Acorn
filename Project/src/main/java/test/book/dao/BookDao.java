@@ -32,7 +32,7 @@ public class BookDao {
 			// Connection Pool에서 Connection 객체를 하나 얻어온다.
 			conn = new DbcpBean().getConn();
 			// 실행할 sql 문의 뼈대 구성하기
-			String sql = "SELECT *"
+			String sql = "SELECT num, name, publisher, author, TO_CHAR(publicationdate, 'YYYY.MM.DD') AS publicationdate"
 					+ " FROM book"
 					+ " ORDER BY num DESC";
 			// sql 문의 ?에 바인딩 할 게 있으면 한다.
@@ -65,6 +65,45 @@ public class BookDao {
 		}
 		return list;
    }
+   
+   public boolean insert(BookDto dto) {
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	   
+	      int rowCount = 0;
+	   
+	      try {
+	         conn = new DbcpBean().getConn();
+	         String sql = "INSERT INTO book"
+	               +" (num, name, publisher, author, publicationdate)"
+	               + " VALUES(book_seq.NEXTVAL, ?, ?, ?, ?)";
+	   
+	         pstmt = conn.prepareStatement(sql);
+	         // ?에 바인딩할게 있으면 해주고
+	         pstmt.setString(1, dto.getName());
+	         pstmt.setString(2, dto.getPublisher());
+	         pstmt.setString(3, dto.getAuthor());
+	         pstmt.setString(4, dto.getPublicationDate());
+	         // INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW의 갯수 리턴 받기
+	         rowCount = pstmt.executeUpdate();
+	   
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (pstmt != null)
+	               pstmt.close();
+	            if (conn != null)
+	               conn.close();
+	         } catch (Exception e) {
+	         }
+	      }
+	      if (rowCount > 0) {
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
   
 }
 
