@@ -27,13 +27,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="app">
 		<div class="border m-5 p-5">
 			<%-- 만일 글 작성자가 로그인된 아이디와 같다면 수정, 삭제 링크를 제공한다. --%>
 			<%if(dto.getWriter().equals(id)){ %>
 				<div class="text-end mb-3">
 					<button class="btn btn-sm btn-dark" onclick="location.href='private/updateform.jsp?num=<%=dto.getNum()%>'">수정</button>
-					<button class="btn btn-sm btn-danger" onclick="deleteConfirm()">삭제</button>
+					<button class="btn btn-sm btn-danger" v-on:click="deleteConfirm">삭제</button>
 				</div>
 			<%} %>
 			<h3 ><strong><%=dto.getTitle() %></strong></h3>
@@ -83,28 +83,35 @@
 							<%if(tmp.getWriter().equals(id)){ %>
 								<button class="btn btn-sm btn-dark" onclick="location.href='comment/updateform.jsp?num=<%=dto.getNum()%>'">수정</button>
 								<%String s = tmp.getComment1();%>
-								<button class="btn btn-sm btn-danger" onclick="commentdel(<%=s%>)">삭제</button>
+								<button class="btn btn-sm btn-danger" onclick="commentdel">삭제</button>
 							<%} %>
 						</div>
 					<%} %>
 				<%} %>
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script>
-	
-		function commentdel(num){
-			const isDelete = confirm("이 댓글을 삭제하겠습니까?");
-			if(isDelete){
-				location.href="${pageContext.request.contextPath }/comment/delete.jsp?num="+num+"&boardNum=<%=dto.getNum()%>";
+		let app = new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			methods:{
+				commentdel(num){
+					const isDelete = confirm("이 댓글을 삭제하겠습니까?");
+					if(isDelete){
+						location.href="${pageContext.request.contextPath }/comment/delete.jsp?num="+num+"&boardNum=<%=dto.getNum()%>";
+					}
+				},
+				deleteConfirm(){
+					const isDelete = confirm("이 글을 삭제하겠습니까?");
+					if(isDelete){
+						location.href="private/delete.jsp?num=<%=dto.getNum()%>";
+					}
+				}
 			}
-		}
-		function deleteConfirm(){
-			const isDelete = confirm("이 글을 삭제하겠습니까?");
-			if(isDelete){
-				location.href="private/delete.jsp?num=<%=dto.getNum()%>";
-			}
-		}
-		
+		});		
 		
 	</script>
 </body>
