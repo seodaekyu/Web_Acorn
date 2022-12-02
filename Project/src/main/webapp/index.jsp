@@ -25,6 +25,7 @@
 		<%} %>
 		<li><a href="${pageContext.request.contextPath }/my/rentlist.jsp">대출목록</a></li>
 		<li><a href="${pageContext.request.contextPath }/my/returnlist.jsp">반납목록</a></li>
+		<li><a href="${pageContext.request.contextPath }/board/list.jsp">게시판</a></li>
 		
 	</ul>	
 </body>
