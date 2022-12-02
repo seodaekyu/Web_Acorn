@@ -33,3 +33,13 @@ CREATE TABLE board(
 	regdate DATE -- 글 작성일
 );
 
+-- 댓글의 번호를 얻어낼 시퀀스
+CREATE SEQUENCE board_comment_seq;
+-- 댓글을 저장할 테이블
+CREATE TABLE board_comment(
+	commentnum NUMBER PRIMARY KEY, -- 댓글번호
+	boardnum NUMBER, -- 글번호
+	writer VARCHAR2(100) NOT NULL, -- 댓글 작성자(로그인된 아이디)
+	comment1 CLOB, -- 댓글 내용
+	regdate DATE -- 댓글 작성일
+);
