@@ -16,15 +16,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>/books/rent.jsp</title>
 </head>
 <body>
-	<%if(isSuccess){ %>
+	<script>
+		<%if(isSuccess){ %>
 			alert("<%=booknum %>번 책이 대출되었습니다.");
 			location.href="${pageContext.request.contextPath }/books/list.jsp";
 		<%}else{ %>
 			alert("대출에 실패했습니다.");
 			location.href="${pageContext.request.contextPath }/books/list.jsp";
 		<%} %>
+	</script>
 </body>
 </html>

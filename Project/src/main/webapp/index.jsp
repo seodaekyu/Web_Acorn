@@ -20,7 +20,11 @@
 		<%} %>
 		<li><a href="${pageContext.request.contextPath }/users/signup_form.jsp">회원가입</a></li>
 		<li><a href="${pageContext.request.contextPath }/books/list.jsp">도서목록</a></li>
-		<li><a href="${pageContext.request.contextPath }/books/insertform.jsp">도서추가</a></li>
+		<%if(id != null && id.equals("manager")){ %>
+			<li><a href="${pageContext.request.contextPath }/books/insertform.jsp">도서추가</a></li>
+		<%} %>
+		<li><a href="${pageContext.request.contextPath }/my/rentlist.jsp">대출목록</a></li>
+		
 	</ul>	
 </body>
 </html>

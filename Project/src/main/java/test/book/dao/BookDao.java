@@ -22,6 +22,51 @@ public class BookDao {
       return dao;
    }
    
+   // 책 번호로 해당 책 정보 불러오기
+   public BookDto getData(int num) {
+	   BookDto dto = null;
+	   // 필요한 객체를 담을 지역변수를 미리 만들어 둔다.
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// Connection Pool에서 Connection 객체를 하나 얻어온다.
+			conn = new DbcpBean().getConn();
+			// 실행할 sql 문의 뼈대 구성하기
+			String sql = "SELECT num, name, publisher, author, TO_CHAR(publicationdate, 'YYYY.MM.DD') AS publicationdate"
+					+ " FROM book"
+					+ " WHERE num=?";
+			// sql 문의 ?에 바인딩 할 게 있으면 한다.
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			// SELECT문을 수행하고 결과값을 받아온다.
+			rs = pstmt.executeQuery();
+			// 반복문 돌면서 ResultSet에서 필요한 값을 얻어낸다.
+			while (rs.next()) {
+				dto = new BookDto();
+				dto.setNum(rs.getInt("num"));
+				dto.setName(rs.getString("name"));
+				dto.setPublisher(rs.getString("publisher"));
+				dto.setAuthor(rs.getString("author"));
+				dto.setPublicationDate(rs.getString("publicationdate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return dto;
+   }
+   
+   // 전체 책 정보 불러오기
    public List<BookDto> getList() {
 	   List<BookDto> list = new ArrayList<>();
 	   // 필요한 객체를 담을 지역변수를 미리 만들어 둔다.
@@ -66,6 +111,7 @@ public class BookDao {
 		return list;
    }
    
+   // 책 정보 추가
    public boolean insert(BookDto dto) {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;

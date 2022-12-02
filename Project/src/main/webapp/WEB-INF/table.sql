@@ -17,6 +17,7 @@ CREATE TABLE rent(
 	booknum NUMBER,
 	id VARCHAR(50),
 	rentdate DATE,
-	returndate DATE
+	returndate DATE,
+	returncompletedate DATE
 );
 

@@ -6,16 +6,18 @@ public class RentDto {
 	private String id;
 	private String rentdate;
 	private String returndate;
+	private String returncompletedate;
 	
 	public RentDto() {}
-	
-	public RentDto(int rentnum, int booknum, String id, String rentdate, String returndate) {
+
+	public RentDto(int rentnum, int booknum, String id, String rentdate, String returndate, String returncompletedate) {
 		super();
 		this.rentnum = rentnum;
 		this.booknum = booknum;
 		this.id = id;
 		this.rentdate = rentdate;
 		this.returndate = returndate;
+		this.returncompletedate = returncompletedate;
 	}
 
 	public int getRentnum() {
@@ -56,6 +58,14 @@ public class RentDto {
 
 	public void setReturndate(String returndate) {
 		this.returndate = returndate;
+	}
+
+	public String getReturncompletedate() {
+		return returncompletedate;
+	}
+
+	public void setReturncompletedate(String returncompletedate) {
+		this.returncompletedate = returncompletedate;
 	}
 	
 	

@@ -35,7 +35,7 @@
 						<td><%=tmp.getPublisher() %></td>
 						<td><%=tmp.getAuthor() %></td>
 						<td><%=tmp.getPublicationDate() %></td>
-						<%if(RentDao.getInstance().getDate(tmp.getNum()) == null){ %>
+						<%if(RentDao.getInstance().BookNum_getDate(tmp.getNum()) == null){ %>
 							<td><button onclick="location.href='rent.jsp?booknum=<%=tmp.getNum()%>'">대출</button></td>
 						<%} %>
 					</tr>

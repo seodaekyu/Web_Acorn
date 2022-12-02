@@ -23,7 +23,8 @@ public class RentDao {
       return dao;
    }
   
-   public RentDto getDate(int num) {
+   // 책 번호에 따른 대여 내역 불러오기 (대출 가능여부)
+   public RentDto BookNum_getDate(int num) {
 	   RentDto dto = null;
 	   // 필요한 객체를 담을 지역변수를 미리 만들어 둔다.
 		Connection conn = null;
@@ -33,9 +34,10 @@ public class RentDao {
 			// Connection Pool에서 Connection 객체를 하나 얻어온다.
 			conn = new DbcpBean().getConn();
 			// 실행할 sql 문의 뼈대 구성하기
-			String sql = "SELECT rentnum, id, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD') AS returndate"
+			String sql = "SELECT rentnum, id, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD') AS returndate, TO_CHAR(returncompletedate, 'YYYY.MM.DD') AS returncompletedate"
 					+ " FROM rent"
-					+ " WHERE booknum = ?";
+					+ " WHERE booknum = ? "
+					+ " AND returncompletedate IS NULL";
 			// sql 문의 ?에 바인딩 할 게 있으면 한다.
 			
 			pstmt = conn.prepareStatement(sql);
@@ -51,6 +53,7 @@ public class RentDao {
 				dto.setId(rs.getString("id"));
 				dto.setRentdate(rs.getString("rentdate"));
 				dto.setReturndate(rs.getString("returndate"));
+				dto.setReturncompletedate(rs.getString("returncompletedate"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,6 +71,55 @@ public class RentDao {
 		return dto;
    }
    
+   // ID에 따른 대여 내역 불러오기
+   public List<RentDto> ID_getDate(String id) {
+	   List<RentDto> list = new ArrayList<>();
+	   // 필요한 객체를 담을 지역변수를 미리 만들어 둔다.
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// Connection Pool에서 Connection 객체를 하나 얻어온다.
+			conn = new DbcpBean().getConn();
+			// 실행할 sql 문의 뼈대 구성하기
+			String sql = "SELECT rentnum, booknum, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD') AS returndate, TO_CHAR(returncompletedate, 'YYYY.MM.DD') AS returncompletedate"
+					+ " FROM rent"
+					+ " WHERE id = ?";
+			// sql 문의 ?에 바인딩 할 게 있으면 한다.
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			// SELECT문을 수행하고 결과값을 받아온다.
+			rs = pstmt.executeQuery();
+			// 반복문 돌면서 ResultSet에서 필요한 값을 얻어낸다.
+			while (rs.next()) {
+				RentDto dto = new RentDto();
+				dto.setRentnum(rs.getInt("rentnum"));
+				dto.setBooknum(rs.getInt("booknum"));
+				dto.setRentdate(rs.getString("rentdate"));
+				dto.setReturndate(rs.getString("returndate"));
+				dto.setReturncompletedate(rs.getString("returncompletedate"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return list;
+   }
+   
+   // 대여 내역 추가
    public boolean insert(RentDto dto) {
 	  Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -77,8 +129,8 @@ public class RentDao {
 		try {
 			conn = new DbcpBean().getConn();
 			String sql = "INSERT INTO rent"
-					+ " (rentnum, booknum, id, rentdate)"
-					+ " VALUES(bookrent_seq.NEXTVAL, ?, ?, SYSDATE)";
+					+ " (rentnum, booknum, id, rentdate, returndate)"
+					+ " VALUES(bookrent_seq.NEXTVAL, ?, ?, SYSDATE, SYSDATE+7)";
 			// sql 문의 ?에 바인딩 할 게 있으면 한다.
 			pstmt = conn.prepareStatement(sql);
 			// ?에 바인딩할게 있으면 해주고
