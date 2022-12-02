@@ -157,6 +157,43 @@ public class RentDao {
 			return false;
 		}
    }
+   
+   // 대출 반납에 대한 반납완료일자 업데이트
+   public boolean update(int rentnum) {
+	   	Connection conn = null;
+		PreparedStatement pstmt = null;
+	
+		int rowCount = 0;
+	
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "UPDATE rent"
+					+ " SET returncompletedate = SYSDATE"
+					+ " WHERE rentnum=?";
+	
+			pstmt = conn.prepareStatement(sql);
+			// ?에 바인딩할게 있으면 해주고
+			pstmt.setInt(1, rentnum);
+			// INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW의 갯수 리턴 받기
+			rowCount = pstmt.executeUpdate();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		if (rowCount > 0) {
+			return true;
+		} else {
+			return false;
+		}
+   }
 }
 
 

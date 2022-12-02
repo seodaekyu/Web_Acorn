@@ -1,8 +1,8 @@
-<%@page import="test.book.dto.BookDto"%>
 <%@page import="test.book.dao.BookDao"%>
-<%@page import="java.util.List"%>
-<%@page import="test.rent.dto.RentDto"%>
+<%@page import="test.book.dto.BookDto"%>
 <%@page import="test.rent.dao.RentDao"%>
+<%@page import="test.rent.dto.RentDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -14,11 +14,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>my/rentlist.jsp</title>
+<title>my/returnlist.jsp</title>
 </head>
 <body>
 	<div class="container">
-		<h3>현재 대출 목록</h3>
+		<h3>도서 반납 목록</h3>
 		<table>
 			<thead>
 				<tr>
@@ -28,13 +28,12 @@
 					<th>출판사</th>
 					<th>저자</th>
 					<th>대출일</th>
-					<th>반납일</th>
-					<th>반납</th>
-				</tr>
+					<th>반납완료일</th>
+				</tr>	
 			</thead>
 			<tbody>
 				<%for(RentDto tmp : list){ 
-					if(tmp.getReturncompletedate()==null){%>
+					if(tmp.getReturncompletedate()!=null){%>
 						<tr>
 							<td><%=tmp.getRentnum() %></td>
 							<td><%=tmp.getBooknum() %></td>
@@ -43,8 +42,7 @@
 							<td><%=bDto.getPublisher() %></td>
 							<td><%=bDto.getAuthor() %></td>
 							<td><%=tmp.getRentdate() %></td>
-							<td><%=tmp.getReturndate() %></td>
-							<td><button onclick="location.href='${pageContext.request.contextPath }/books/return.jsp?rentnum=<%=tmp.getRentnum() %>'">반납</button></td>
+							<td><%=tmp.getReturncompletedate() %></td>
 						</tr>
 				<% 	} 
 				  }%>
