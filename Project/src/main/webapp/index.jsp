@@ -25,16 +25,9 @@
 	  width: 100%;
 	  height: 160px;
 	}
-
-	.carousel-item{
-		width : 500px;
-	    height: 500px;
-	    text-align: center;
-	} 
 	.carousel-item img{
 		width: 500px;
 	    height: 500px;
-	    text-align: center;
 	}
 }
 </style>
@@ -46,17 +39,17 @@
 	</jsp:include>
 	<div class="container">
 		<div >
-			<h3 mt-5><strong>베스트 셀러 Top3</strong></h3>
+			<h3 class="mt-5"><strong>베스트 셀러 Top3</strong></h3>
 			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 			  <div class="carousel-inner">
-		    	<div class="carousel-item text-center active">
-			     <img src="https://bimage.interpark.com/partner/goods_image/5/6/2/4/355855624g.jpg" class="d-block w-100" alt="...">
+		    	<div class="carousel-item text-center active"">
+			     <img src="https://bimage.interpark.com/partner/goods_image/5/6/2/4/355855624g.jpg" alt="...">
 			    </div>
-			    <div class="carousel-item">
-			      <img src="https://bimage.interpark.com/partner/goods_image/0/3/6/1/355430361g.jpg" class="d-block w-100" alt="...">
+			    <div class="carousel-item"">
+			      <img src="https://bimage.interpark.com/partner/goods_image/0/3/6/1/355430361g.jpg" alt="...">
 			    </div>
-			    <div class="carousel-item">
-			      <img src="https://bimage.interpark.com/partner/goods_image/9/3/0/5/355939305g.jpg" class="d-block w-100" alt="...">
+			    <div class="carousel-item"">
+			      <img src="https://bimage.interpark.com/partner/goods_image/9/3/0/5/355939305g.jpg" alt="...">
 			    </div>
 			  </div>
 			</div>
