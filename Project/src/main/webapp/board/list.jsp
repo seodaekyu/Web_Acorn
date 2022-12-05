@@ -61,13 +61,15 @@
 			</thead>
 			<tbody>
 				<%for(BoardDto tmp:list){ %>
-					<td><%=tmp.getNum() %></td>
-					<td><%=tmp.getWriter() %></td>
-					<td>
-						<a href="${pageContext.request.contextPath }/board/detail.jsp?num=<%=tmp.getNum()%>"><%=tmp.getTitle() %></a>
-					</td>
-					<td><%=tmp.getViewCount() %></td>
-					<td><%=tmp.getRegdate() %></td>
+					<tr>
+						<td><%=tmp.getNum() %></td>
+						<td><%=tmp.getWriter() %></td>
+						<td>
+							<a href="${pageContext.request.contextPath }/board/detail.jsp?num=<%=tmp.getNum()%>"><%=tmp.getTitle() %></a>
+						</td>
+						<td><%=tmp.getViewCount() %></td>
+						<td><%=tmp.getRegdate() %></td>
+					</tr>
 				<%} %>
 			</tbody>
 		</table>
