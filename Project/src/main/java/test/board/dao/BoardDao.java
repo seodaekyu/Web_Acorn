@@ -34,7 +34,7 @@ public class BoardDao {
 			// Connection Pool에서 Connection 객체를 하나 얻어온다.
 			conn = new DbcpBean().getConn();
 			// 실행할 sql 문의 뼈대 구성하기
-			String sql = "SELECT num, writer, title, content, viewCount, TO_CHAR(regdate, 'YYYY.MM.DD') AS regdate"
+			String sql = "SELECT num, writer, title, content, viewCount, TO_CHAR(regdate, 'YYYY.MM.DD HH24:MI:SS') AS regdate"
 					+ " FROM board"
 					+ " WHERE num = ?";
 			// sql 문의 ?에 바인딩 할 게 있으면 한다.

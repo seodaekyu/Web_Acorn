@@ -30,25 +30,26 @@
 		<jsp:param value="bookPlus" name="thisPage"/>
 	</jsp:include>
 	<div class="container">
+		<h3 class="mt-3"><strong>도서 추가</strong></h3>	
 		<form action="insert.jsp" method="post">
-			<div>
-				<label for="name">도서명</label>
-				<input type="text" name="name" id="name" />
+			<div class="mb-3 col-6">
+				<label class="form-label mt-3" for="name">도서명</label>
+				<input class="form-control" type="text" name="name" id="name" />
 			</div>
-			<div>
-				<label for="publisher">출판사</label>
-				<input type="text" name="publisher" id="publisher" />
+			<div class="mb-3 col-6">
+				<label class="form-label mt-3" for="publisher">출판사</label>
+				<input class="form-control" type="text" name="publisher" id="publisher" />
 			</div>
-			<div>
-				<label for="author">저자</label>
-				<input type="text" name="author" id="author" />
+			<div class="mb-3 col-6">
+				<label class="form-label mt-3" for="author">저자</label>
+				<input class="form-control" type="text" name="author" id="author" />
 			</div>
-			<div>
-				<label for="publicationdate">출판일</label>
+			<div class="mb-3 col-6">
+				<label class="form-label mt-3" for="publicationdate">출판일</label>
 				<input type="date" name="publicationdate" id="publicationdate" />
 			</div>
 
-			<button type="submit">저장</button>
+			<button class="btn btn-dark" type="submit">저장</button>
 		</form>
 	</div>
 	<jsp:include page="/include/footer.jsp"></jsp:include>

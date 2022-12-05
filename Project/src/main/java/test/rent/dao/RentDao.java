@@ -34,7 +34,7 @@ public class RentDao {
 			// Connection Pool에서 Connection 객체를 하나 얻어온다.
 			conn = new DbcpBean().getConn();
 			// 실행할 sql 문의 뼈대 구성하기
-			String sql = "SELECT rentnum, id, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD') AS returndate, TO_CHAR(returncompletedate, 'YYYY.MM.DD') AS returncompletedate"
+			String sql = "SELECT rentnum, id, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD HH24:MI:SS') AS returndate, TO_CHAR(returncompletedate, 'YYYY.MM.DD') AS returncompletedate"
 					+ " FROM rent"
 					+ " WHERE booknum = ? "
 					+ " AND returncompletedate IS NULL";
@@ -82,7 +82,7 @@ public class RentDao {
 			// Connection Pool에서 Connection 객체를 하나 얻어온다.
 			conn = new DbcpBean().getConn();
 			// 실행할 sql 문의 뼈대 구성하기
-			String sql = "SELECT rentnum, booknum, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD') AS returndate, TO_CHAR(returncompletedate, 'YYYY.MM.DD') AS returncompletedate"
+			String sql = "SELECT rentnum, booknum, TO_CHAR(rentdate, 'YYYY.MM.DD') AS rentdate, TO_CHAR(returndate, 'YYYY.MM.DD HH24:MI:SS') AS returndate, TO_CHAR(returncompletedate, 'YYYY.MM.DD') AS returncompletedate"
 					+ " FROM rent"
 					+ " WHERE id = ?";
 			// sql 문의 ?에 바인딩 할 게 있으면 한다.

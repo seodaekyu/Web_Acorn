@@ -38,9 +38,9 @@
 		<jsp:param value="bookList" name="thisPage"/>
 	</jsp:include>
 	<div class="container">
-		<h3>도서 목록</h3>
-		<table>
-			<thead>
+			<h3><strong>도서 목록</strong></h3>
+		<table class="table table-striped mt-3">
+			<thead class="table-dark">
 				<tr>
 					<th>도서번호</th>
 					<th>도서이름</th>
