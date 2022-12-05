@@ -25,6 +25,18 @@
 	  width: 100%;
 	  height: 160px;
 	}
+
+	.carousel-item{
+		width : 500px;
+	    height: 500px;
+	    text-align: center;
+	} 
+	.carousel-item img{
+		width: 500px;
+	    height: 500px;
+	    text-align: center;
+	}
+}
 </style>
 </head>
 <body>
@@ -33,24 +45,23 @@
 		<jsp:param value="index" name="thisPage"/>
 	</jsp:include>
 	<div class="container">
-		<%if(id!=null){ %>
-		<p><%=id %>님 로그인 중...</p>
-		<%} %>
-		<ul>
-			<li><a href="${pageContext.request.contextPath }/users/loginform.jsp">로그인</a></li>
-			<%if(id!=null){ %>
-				<li><a href="${pageContext.request.contextPath }/users/logout.jsp">로그아웃</a></li>
-			<%} %>
-			<li><a href="${pageContext.request.contextPath }/users/signup_form.jsp">회원가입</a></li>
-			<li><a href="${pageContext.request.contextPath }/books/list.jsp">도서목록</a></li>
-			<%if(id != null && id.equals("manager")){ %>
-				<li><a href="${pageContext.request.contextPath }/books/insertform.jsp">도서추가</a></li>
-			<%} %>
-			<li><a href="${pageContext.request.contextPath }/my/rentlist.jsp">대출목록</a></li>
-			<li><a href="${pageContext.request.contextPath }/my/returnlist.jsp">반납목록</a></li>
-			<li><a href="${pageContext.request.contextPath }/board/list.jsp">게시판</a></li>	
-		</ul>
-	</div>	
+		<div >
+			<h3 mt-5><strong>베스트 셀러 Top3</strong></h3>
+			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-inner">
+		    	<div class="carousel-item text-center active">
+			     <img src="https://bimage.interpark.com/partner/goods_image/5/6/2/4/355855624g.jpg" class="d-block w-100" alt="...">
+			    </div>
+			    <div class="carousel-item">
+			      <img src="https://bimage.interpark.com/partner/goods_image/0/3/6/1/355430361g.jpg" class="d-block w-100" alt="...">
+			    </div>
+			    <div class="carousel-item">
+			      <img src="https://bimage.interpark.com/partner/goods_image/9/3/0/5/355939305g.jpg" class="d-block w-100" alt="...">
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
 	<jsp:include page="/include/footer.jsp"></jsp:include>
 </body>
 </html>
