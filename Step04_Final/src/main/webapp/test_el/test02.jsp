@@ -60,7 +60,7 @@
 	<p>우리 이름은 <strong>${ourName }</strong></p>
 	<%-- 위의 EL 은 아래의 코드를 대신할수 있다. --%>
 	<%
-		String result2 = (String)session.geAttribute("ourName");
+		String result2 = (String)session.getAttribute("ourName");
 	%>
 	<p>우리 이름은 <strong><%=result2 %></strong></p>
 	

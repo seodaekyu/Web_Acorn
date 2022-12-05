@@ -23,10 +23,30 @@
 <head>
 <meta charset="UTF-8">
 <title>/board/detail.jsp</title>
+<style>
+	html {
+	  position: relative;
+	  min-height: 100%;
+	  padding-bottom:160px;
+	}
+	body {
+	  margin-bottom: 160px;
+	}
+	footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 160px;
+	}
+</style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
+	<%-- navbar 포함 --%>
+	<jsp:include page="/include/navbar.jsp">
+		<jsp:param value="Board" name="thisPage"/>
+	</jsp:include>
 	<div class="container" id="app">
 		<div class="border m-5 p-5">
 			<%-- 만일 글 작성자가 로그인된 아이디와 같다면 수정, 삭제 링크를 제공한다. --%>
@@ -70,7 +90,7 @@
 						<label for="comment1"><%=id %></label>
 						<input type="text" id="comment1" name="comment1" value="댓글을 입력하세요..." />
 					</div>
-					<button type="submit">등록</button>
+					<button type="submit" class="btn-dark">등록</button>
 				</form>
 				<%} %>
 				<!-- 댓글 보이게 하기 -->
@@ -78,24 +98,33 @@
 					<%if(dto.getNum() == tmp.getBoardNum()){ %>
 						<div>
 							<p><%=tmp.getWriter() %></p>
-							<p><%=tmp.getComment1() %></p>
+							<p v-if=commentShow><%=tmp.getComment1() %></p>
+							<form v-if=!commentShow action="${pageContext.request.contextPath }/comment/update.jsp" method="post">
+								<div>
+									<input type="hidden" name="num" value="<%=tmp.getCommentNum() %>" />
+									<input type="hidden" name="boardNum" value="<%=dto.getNum() %>" />
+									<input type="text" id="comment1" name="comment1" value="<%=tmp.getComment1() %>" />
+								</div>
+								<button type="submit" class="btn-dark">수정</button>
+							</form>
 							<p><%=tmp.getRegdate() %></p>
 							<%if(tmp.getWriter().equals(id)){ %>
-								<button class="btn btn-sm btn-dark" onclick="location.href='comment/updateform.jsp?num=<%=dto.getNum()%>'">수정</button>
-								<%String s = tmp.getComment1();%>
-								<button class="btn btn-sm btn-danger" onclick="commentdel">삭제</button>
+								<button v-if=commentShow class="btn btn-sm btn-dark" v-on:click="update">수정</button>
+								<button v-if=commentShow class="btn btn-sm btn-danger" v-on:click="commentdel(<%=tmp.getCommentNum()%>)">삭제</button>
 							<%} %>
 						</div>
 					<%} %>
 				<%} %>
 		</div>
 	</div>
+	<jsp:include page="/include/footer.jsp"></jsp:include>
+	
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script>
 		let app = new Vue({
 			el:"#app",
 			data:{
-				
+				commentShow : true
 			},
 			methods:{
 				commentdel(num){
@@ -109,6 +138,9 @@
 					if(isDelete){
 						location.href="private/delete.jsp?num=<%=dto.getNum()%>";
 					}
+				},
+				update(){
+					this.commentShow=false;
 				}
 			}
 		});		

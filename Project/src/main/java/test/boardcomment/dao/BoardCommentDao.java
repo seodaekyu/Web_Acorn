@@ -47,7 +47,7 @@ public class BoardCommentDao {
 			// 반복문 돌면서 ResultSet에서 필요한 값을 얻어낸다.
 			while (rs.next()) {
 				BoardCommentDto tmp = new BoardCommentDto();
-				tmp.setCommnetNum(rs.getInt("commentnum"));
+				tmp.setCommentNum(rs.getInt("commentnum"));
 				tmp.setBoardNum(rs.getInt("boardnum"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setComment1(rs.getString("comment1"));
@@ -161,6 +161,44 @@ public class BoardCommentDao {
 			pstmt = conn.prepareStatement(sql);
 			// ?에 바인딩할게 있으면 해주고
 			pstmt.setInt(1, boardnum);
+			// INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW의 갯수 리턴 받기
+			rowCount = pstmt.executeUpdate();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		if (rowCount > 0) {
+			return true;
+		} else {
+			return false;
+		}
+   }
+   
+   // 댓글 번호로 댓글 업데이트 하기
+   public boolean update(BoardCommentDto dto) {
+	   	Connection conn = null;
+		PreparedStatement pstmt = null;
+	
+		int rowCount = 0;
+	
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "UPDATE board_comment"
+					+ " SET comment1 = ?"
+					+ " WHERE commentnum=?";
+	
+			pstmt = conn.prepareStatement(sql);
+			// ?에 바인딩할게 있으면 해주고
+			pstmt.setString(1, dto.getComment1());
+			pstmt.setInt(2, dto.getCommentNum());
 			// INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW의 갯수 리턴 받기
 			rowCount = pstmt.executeUpdate();
 	

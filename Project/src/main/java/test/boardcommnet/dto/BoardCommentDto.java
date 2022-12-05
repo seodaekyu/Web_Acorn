@@ -1,7 +1,7 @@
 package test.boardcommnet.dto;
 
 public class BoardCommentDto {
-	private int commnetNum;
+	private int commentNum;
 	private int boardNum;
 	private String writer;
 	private String comment1;
@@ -9,21 +9,21 @@ public class BoardCommentDto {
 	
 	public BoardCommentDto() {}
 
-	public BoardCommentDto(int commnetNum, int boardNum, String writer, String comment1, String regdate) {
+	public BoardCommentDto(int commentNum, int boardNum, String writer, String comment1, String regdate) {
 		super();
-		this.commnetNum = commnetNum;
+		this.commentNum = commentNum;
 		this.boardNum = boardNum;
 		this.writer = writer;
 		this.comment1 = comment1;
 		this.regdate = regdate;
 	}
 
-	public int getCommnetNum() {
-		return commnetNum;
+	public int getCommentNum() {
+		return commentNum;
 	}
 
-	public void setCommnetNum(int commnetNum) {
-		this.commnetNum = commnetNum;
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
 	}
 
 	public int getBoardNum() {
@@ -57,6 +57,7 @@ public class BoardCommentDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
+
+
 	
 }

@@ -3,11 +3,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>-->
 <%
 	//글목록
-	List<CafeDto> list=CafeDao.getInstance().getList();
-	request.setAttribute("list", list);
+	//List<CafeDto> list=CafeDao.getInstance().getList(dto);
+	//request.setAttribute("list", list);
 %>    
 <!DOCTYPE html>
 <html>
