@@ -102,7 +102,7 @@
 								</svg>
 								<%=id %>
 							</p>
-							<textarea class="form-control" id="comment1" name="comment1" row="3">댓글을 입력하세요...</textarea>
+							<textarea class="form-control" id="comment1" name="comment1" row="3" placeholder="댓글을 입력하세요."></textarea>
 						</div>
 						<button type="submit" class="btn btn-dark mt-3">등록</button>
 					</form>
@@ -168,7 +168,7 @@
 					}
 				},
 				update(){
-					this.commentShow=false;
+					this.commentShow = false;
 				}
 			}
 		});		
