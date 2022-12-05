@@ -134,6 +134,7 @@
 								</div>
 								<button type="submit" class="btn btn-sm btn-dark">수정</button>
 							</form>
+							<%=tmp.getComment1() %>
 							<%if(tmp.getWriter().equals(id)){ %>
 								<button v-if=commentShow class="btn btn-sm btn-dark" v-on:click="update">수정</button>
 								<button v-if=commentShow class="btn btn-sm btn-danger" v-on:click="commentdel(<%=tmp.getCommentNum()%>)">삭제</button>
